@@ -1,6 +1,6 @@
 # Delta-Hedged Option P&L Attribution Engine
 
-A Python engine for backtesting delta-hedged options strategies and decomposing P&L into theoretical and realized volatility components under explicit hedging rules.
+A Python engine for backtesting delta-hedged options strategies and decomposing P&L into realized and implied volatility components under explicit hedging rules.
 
 ---
 
@@ -12,8 +12,8 @@ It supports:
 
 - Single-option and multi-contract portfolios
 - Explicit delta targets and discrete hedging intervals
-- Per-contract option price time series
-- Transparent P&L decomposition consistent with common sell-side and buy-side conventions
+- Per-contract time series
+- Transparent P&L decomposition consistent with buy-side conventions
 
 The engine prioritizes **correctness, transparency, and extensibility** over execution speed.
 
@@ -83,12 +83,13 @@ Inputs:
 - `OptionContract` instance
 
 Outputs:
-- DataFrame containing:
+- P&L DataFrame containing:
+  - Price Data
+  - Volatility Data
   - Greeks
-  - Hedge positions
-  - Realized P&L
-  - Theoretical P&L components
-  - Residual P&L
+  - Position Weighted Greeks
+  - Actual P&L
+  - Theoretical P&L
 
 ### `PortfolioPnL`
 - Aggregates multiple `SingleContractPnL` paths
@@ -105,10 +106,7 @@ P&L is decomposed using low-order Greek approximations per hedge interval:
   Stock P&L from the delta-hedged position
 
 - **Gamma P&L**  
-    $$
-    \frac{1}{2}\,\Gamma\,(\Delta S)^2
-    $$
-
+    $\frac{1}{2}\Gamma(\Delta S)^2$
 - **Theta P&L**  
   Time decay accrued over the hedge interval
 
@@ -135,7 +133,7 @@ P&L is decomposed using low-order Greek approximations per hedge interval:
 
 ### Assumptions
 
-- Stock and option prices are pandas Series indexed by timestamps
+- Stock and option prices are pandas series indexed by Timestamp
 - The stock series contains **all timestamps** used by every option series
 - Option prices are required as inputs  
   (native IV-series ingestion is planned but not yet supported)
@@ -173,7 +171,7 @@ cd delta_hedge
 pip install -r requirements.txt
 python example.py
 ```
-- The example script loads in stock and option data from examples/data and creates full P&L attribution DataFrame for a long call, put, and straddle
+- The example script loads in stock and option data from example_data and creates full P&L attribution DataFrame for a long call, put, and straddle
 ## Limitations
 - No transaction costs or bid-ask spread modeling
 - Constant interest rates and no dividends
