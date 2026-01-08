@@ -9,13 +9,13 @@ import pandas as pd
 # Reading in example data 
 # from csv and converted to pd.Series
 #####################################
-call_df = pd.read_csv("data/tsla_call.csv")
+call_df = pd.read_csv("example_data/tsla_call.csv")
 call_series = pd.Series(call_df["option_price"].values, index=call_df["date"])
 
-put_df = pd.read_csv("data/tsla_put.csv")
+put_df = pd.read_csv("example_data/tsla_put.csv")
 put_series = pd.Series(put_df["option_price"].values, index=put_df["date"])
 
-stock_df = pd.read_csv("data/tsla_stock.csv")
+stock_df = pd.read_csv("example_data/tsla_stock.csv")
 stock_series = pd.Series(stock_df["stock_price"].values, index=stock_df["timestamp"])
 
 ####################################

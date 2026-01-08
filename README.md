@@ -171,7 +171,7 @@ Requires Python 3.10+.
 git clone https://github.com/miles-vollet8/delta_hedge
 cd delta_hedge
 pip install -r requirements.txt
-python examples/example.py
+python example.py
 ```
 - The example script loads in stock and option data from examples/data and creates full P&L attribution DataFrame for a long call, put, and straddle
 ## Limitations

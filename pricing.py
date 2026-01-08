@@ -100,3 +100,44 @@ def time_solver(date: str):
     
     return time
 
+def compute_greeks(S, K, time, vol, r, is_call=True):
+    d1 = d1_calc(S, K, time, vol, r)
+    d2 = d2_calc(d1, vol, time)
+
+    # Use individual greek calculation functions
+    # Delta: delta_calc returns call delta, adjust for puts
+    call_delta = delta_calc(S, K, time, vol, r)
+    if is_call:
+        delta = call_delta
+    else:
+        delta = call_delta - 1.0
+
+    # Gamma: use gamma_calc directly
+    gamma = gamma_calc(S, K, time, vol, r)
+
+    # Vega: vega_calc already divides by 100, but needs d1 as input
+    vega = vega_calc(d1, S, time)
+
+    # Vanna: vanna_calc returns raw value, divide by 100
+    vanna = vanna_calc(S, K, time, vol, r) / 100
+
+    # Volga: volga_calc returns raw value, divide by 100
+    volga = volga_calc(S, K, time, vol, r) / 100
+
+    # Theta: theta_calc already divides by 365.0
+    theta = theta_calc(S, K, time, vol, r, is_call=is_call)
+
+    # Rho: rho_calc already divides by 100.0
+    rho = rho_calc(S, K, time, vol, r, is_call=is_call)
+
+    return {
+        "delta": delta,
+        "gamma": gamma,
+        "vega": vega,
+        'vanna': vanna,
+        'volga': volga,
+        "theta": theta,
+        "rho": rho,
+        "d1": d1,
+        "d2": d2
+    }

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal, Optional, List
 
 import numpy as np
 import pandas as pd
@@ -11,7 +10,7 @@ from contracts import OptionContract
 
 
 TRADING_DAYS = 365.0
-from pricing import compute_greeks, iv_solve
+from pricing import iv_solve, compute_greeks
 from config import PnLModelConfig
 from hedging import compute_hedges, parse_hedge_freq
 import math
