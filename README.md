@@ -168,8 +168,8 @@ Notes:
 Requires Python 3.10+.
 
 ```bash
-git clone <repo>
-cd <repo>
+git clone https://github.com/miles-vollet8/delta_hedge
+cd delta_hedge
 pip install -r requirements.txt
 python examples/example.py
 ```
