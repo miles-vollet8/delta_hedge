@@ -1,0 +1,12 @@
+__pycache__/
+engine/
+get_returns.py
+helpers.py
+main.py
+oldreadme.md
+option_pull.py
+option.xlsx
+stock.xlsx
+test.xlsx
+test1.xlsx
+test2.xlsx
